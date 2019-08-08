@@ -1,0 +1,1 @@
+tesseract  capture.png didocr -l sin
