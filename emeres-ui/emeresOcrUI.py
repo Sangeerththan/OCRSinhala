@@ -7,9 +7,9 @@
 # WARNING! All changes made in this file will be lost!
 
 import sys
-import os , re , cv2 , pytesseract
+import os , re , cv2 , pytesseract, codecs, difflib
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import  QIcon ,QPixmap 
+from PyQt5.QtGui import  QIcon ,QPixmap, QColor
 
 
 class Ui_MainWindow(object):
@@ -108,7 +108,8 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.buttonGetImage.clicked.connect(self.getImage)
-        self.buttonExtractText.clicked.connect(self.extractText) 
+        self.buttonExtractText.clicked.connect(self.extractText)
+        self.buttonExtractText_2.clicked.connect(self.extractText_2) 
         self.buttonExtractText.setEnabled(False)
         self.buttonClear.clicked.connect(self.clearText) 
         self.buttonSave.clicked.connect(self.saveText) 
@@ -133,7 +134,7 @@ class Ui_MainWindow(object):
         # self.fileName, _ = QtWidgets.QFileDialog.getOpenFileName(self,"Open a image", "","All Files (*);;Image Files (*.jpg);;Image Files (*.png)", options=options)
         if self.fileName:
             print(self.fileName)
-            pattern = ".(jpg|png|jpeg|bmp|jpe|tiff)$"
+            pattern = ".(jpg|png|jpeg|bmp|jpe|tiff|JPG)$"
             if re.search(pattern,self.fileName):
                 self.setImage(self.fileName)
 
@@ -146,9 +147,93 @@ class Ui_MainWindow(object):
         img = cv2.imread(self.fileName, cv2.IMREAD_COLOR)
         # Run tesseract OCR on image
         text = pytesseract.image_to_string(img, config=config)
+
+        ocr_words = text.split()
+        g = codecs.open("dic.txt", encoding="utf-8")
+        dic_words = g.read().split()
+        g.close
+
+        fulllist = []
+
+        for i in range(0, len(ocr_words)):
+            checkdic=False
+            checked_word=[]
+            for j in range (0, len(dic_words)):
+                if(ocr_words[i]==dic_words[j]):
+                    checkdic=True
+                    break
+            if(checkdic):
+                checked_word=[ocr_words[i],"1"]
+            else:
+                checked_word=[ocr_words[i],"0"]
+            fulllist.append(checked_word)
+            
+
         # Print recognized text
-        self.textEdit.append(text)
-        print(text)
+        for i in range(0,len(fulllist)):
+            
+            redColor = QColor(255,0,0)
+            blackColor = QColor(0,0,0)
+
+            if (fulllist[i][1] == "0"):
+                self.textEdit.setTextColor(redColor)
+                self.textEdit.insertPlainText(fulllist[i][0]+" ")
+                
+            else:
+                self.textEdit.setTextColor(blackColor)
+                self.textEdit.insertPlainText(fulllist[i][0]+" ")
+        #self.textEdit.append(fulllist)
+
+    def extractText_2(self):
+
+        config = ('-l sin --oem 0 --psm 3')
+        img = cv2.imread(self.fileName, cv2.IMREAD_COLOR)
+        # Run tesseract OCR on image
+        text = pytesseract.image_to_string(img, config=config)
+
+        ocr_words = text.split()
+        g = codecs.open("dic.txt", encoding="utf-8")
+        dic_words = g.read().split()
+        g.close
+
+        fulllist = []
+
+        for i in range(0, len(ocr_words)):
+            checkdic=False
+            checked_word=[]
+            for j in range (0, len(dic_words)):
+                if(ocr_words[i]==dic_words[j]):
+                    checkdic=True
+                    break
+            if(checkdic):
+                checked_word=[ocr_words[i],"1"]
+            else:
+                checked_word=[ocr_words[i],"0"]
+            fulllist.append(checked_word)
+            
+
+        # Print recognized text
+        for i in range(0,len(fulllist)):
+            
+            redColor = QColor(255,0,0)
+            greenColor = QColor(0,128,0)
+            blackColor = QColor(0,0,0)
+
+            if (fulllist[i][1] == "0"):
+                found = difflib.get_close_matches(fulllist[i][0],dic_words)
+                print(found)
+                
+                if (len(found)>0):
+                    self.textEdit.setTextColor(greenColor)
+                    self.textEdit.insertPlainText(found[0]+" ")
+                else:
+                    self.textEdit.setTextColor(blackColor)
+                    self.textEdit.insertPlainText(fulllist[i][0]+" ")
+                
+            else:
+                self.textEdit.setTextColor(blackColor)
+                self.textEdit.insertPlainText(fulllist[i][0]+" ")
+        #self.textEdit.append(fulllist)
 
     def clearText(self):
         self.textEdit.clear()
