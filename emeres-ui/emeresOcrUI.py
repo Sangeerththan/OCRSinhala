@@ -49,11 +49,19 @@ class Ui_MainWindow(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.buttonGetImage = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonGetImage.setGeometry(QtCore.QRect(490, 610, 130, 40))
+        self.buttonGetImage.setGeometry(QtCore.QRect(250, 610, 130, 40))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.buttonGetImage.setFont(font)
         self.buttonGetImage.setObjectName("buttonGetImage")
+        self.buttonGenerateWordFrequency = QtWidgets.QPushButton(self.centralwidget)
+        self.buttonGenerateWordFrequency.setGeometry(QtCore.QRect(700, 610, 130, 40))
+        self.buttonGenerateWordFrequency.setText("Generate Frequency Dictionary")
+        font = QtGui.QFont()
+        font.setPointSize(6)
+        self.buttonGenerateWordFrequency.setFont(font)
+        self.buttonGenerateWordFrequency.setObjectName("buttonGenerateWordFrequency")
+        
         self.labelImage = QtWidgets.QLabel(self.centralwidget)
         self.labelImage.setGeometry(QtCore.QRect(250, 50, 600, 480))
         self.labelImage.setFrameShape(QtWidgets.QFrame.WinPanel)
@@ -108,9 +116,11 @@ class Ui_MainWindow(object):
         MainWindow.setStatusBar(self.statusbar)
 
         self.buttonGetImage.clicked.connect(self.getImage)
+        self.buttonGenerateWordFrequency.clicked.connect(self.generateWordFrequency)
         self.buttonExtractText.clicked.connect(self.extractText)
         self.buttonExtractText_2.clicked.connect(self.extractText_2) 
         self.buttonExtractText.setEnabled(False)
+        #self.buttonExtractText_2.setEnabled(False)
         self.buttonClear.clicked.connect(self.clearText) 
         self.buttonSave.clicked.connect(self.saveText) 
 
@@ -143,6 +153,7 @@ class Ui_MainWindow(object):
         self.buttonExtractText.setEnabled(True)
 
     def extractText(self):
+        self.textEdit.clear()        
         config = ('-l sin --oem 0 --psm 3')
         img = cv2.imread(self.fileName, cv2.IMREAD_COLOR)
         # Run tesseract OCR on image
@@ -185,7 +196,7 @@ class Ui_MainWindow(object):
         #self.textEdit.append(fulllist)
 
     def extractText_2(self):
-
+        self.textEdit.clear()
         config = ('-l sin --oem 0 --psm 3')
         img = cv2.imread(self.fileName, cv2.IMREAD_COLOR)
         # Run tesseract OCR on image
@@ -197,6 +208,17 @@ class Ui_MainWindow(object):
         g.close
 
         fulllist = []
+
+        #Create fequency list
+        frequencyList = []
+        if(os.path.isfile("freq_dic.txt")):
+            f = codecs.open("freq_dic.txt", encoding="utf-8")
+            lines = f.read().splitlines()
+            print(lines)
+            for i in range(0,len(lines)):
+                wordElement = lines[i].split()
+                frequencyList.append(wordElement)    
+            print("Frequency List ",frequencyList)
 
         for i in range(0, len(ocr_words)):
             checkdic=False
@@ -211,7 +233,7 @@ class Ui_MainWindow(object):
                 checked_word=[ocr_words[i],"0"]
             fulllist.append(checked_word)
             
-
+        
         # Print recognized text
         for i in range(0,len(fulllist)):
             
@@ -221,11 +243,30 @@ class Ui_MainWindow(object):
 
             if (fulllist[i][1] == "0"):
                 found = difflib.get_close_matches(fulllist[i][0],dic_words)
-                print(found)
+                
+                print("Found List ",found)
                 
                 if (len(found)>0):
                     self.textEdit.setTextColor(greenColor)
-                    self.textEdit.insertPlainText(found[0]+" ")
+                    matchedList=[]
+                    for p in range(0,len(found)):
+                        for q in range(0,len(frequencyList)):
+                            if (found[p] == frequencyList[q][0]):
+                                matchedList.append(frequencyList[q])
+
+                    print("Matched List ",matchedList)
+
+                    if (len(matchedList)==0):
+                        self.textEdit.insertPlainText(found[0]+" ")
+                    else:
+                        maxElement = [matchedList[0]]
+                        for r in range(1,len(matchedList)):
+                            if(int(maxElement[0][1]) < int(matchedList[r][1])):
+                                maxElement[0] = matchedList[r]
+                        print("Max Element ",maxElement)
+                        self.textEdit.insertPlainText(maxElement[0][0]+ " ")
+
+                                                         
                 else:
                     self.textEdit.setTextColor(blackColor)
                     self.textEdit.insertPlainText(fulllist[i][0]+" ")
@@ -234,6 +275,39 @@ class Ui_MainWindow(object):
                 self.textEdit.setTextColor(blackColor)
                 self.textEdit.insertPlainText(fulllist[i][0]+" ")
         #self.textEdit.append(fulllist)
+
+    def generateWordFrequency(self):
+        fulllist=[["ඒකාබද්ධ",1]]
+
+        for n in range(730,864):
+            if(os.path.isfile("Sinhala-source/Letters 5(S)-"+str(n)+".txt")):
+                print("file "+str(n))
+                f = codecs.open("Sinhala-source/Letters 5(S)-"+str(n)+".txt", encoding="utf-8")
+                #f = codecs.open("Sinhala-source/test.txt", encoding="utf-8")
+                lines = f.read().split()
+
+                for i in range(0,len(lines)):
+                    isitinfulllist = False
+                    ischargood = True
+                    for j in range (0, len(lines[i])):
+                        if(ord(lines[i][j])<128):
+                            ischargood = False
+                            break
+                    if(ischargood):
+                        for k in range(0, len(fulllist)):
+                            if(lines[i]==fulllist[k][0]):
+                                fulllist[k][1] = fulllist[k][1]+1
+                                isitinfulllist = True
+                                break
+                        if(not isitinfulllist):
+                            fulllist.append([lines[i],1])		
+			
+        #print(fulllist)	
+
+        g = codecs.open("freq_dic.txt","w+",encoding="utf-8" )
+
+        for m in range(0,len(fulllist)):
+            g.write(fulllist[m][0]+" "+str(fulllist[m][1])+"\n")
 
     def clearText(self):
         self.textEdit.clear()
