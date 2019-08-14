@@ -9,22 +9,20 @@
 import sys
 import os , re , cv2 , pytesseract, codecs, difflib
 from PyQt5 import QtCore, QtGui, QtWidgets
-from PyQt5.QtGui import  QIcon ,QPixmap, QColor
+from PyQt5.QtGui import  QIcon, QPixmap, QColor
 
 
 class Ui_MainWindow(object):
 
     def __init__(self):
         pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files (x86)\Tesseract-OCR\\tesseract.exe'
-
-
+        
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(1366, 800)
+        MainWindow.resize(1440, 1080)
         MainWindow.setStyleSheet("QMainWindow#MainWindow\n"
 "{\n"
-"    background-color:rgb(72,164,136);\n"
-"    /*background-image: url(\'H:/Github/PythonScripts/PyQtDesigner/WebScrapper/bg.png\');*/\n"
+"    /*background-image: ;*/\n"
 "     background-position: center; /* Center the image */\n"
 "    background-repeat: no-repeat;\n"
 "    background-size: cover;\n"
@@ -46,48 +44,49 @@ class Ui_MainWindow(object):
 "\n"
 "\n"
 "")
+        MainWindow.setStyleSheet( "#MainWindow {background-image: url(horse-with-sinhala-letters.png)}")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.buttonGetImage = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonGetImage.setGeometry(QtCore.QRect(250, 610, 130, 40))
+        self.buttonGetImage.setGeometry(QtCore.QRect(190, 682, 130, 40))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.buttonGetImage.setFont(font)
         self.buttonGetImage.setObjectName("buttonGetImage")
         self.buttonGenerateWordFrequency = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonGenerateWordFrequency.setGeometry(QtCore.QRect(700, 610, 130, 40))
-        self.buttonGenerateWordFrequency.setText("Generate Frequency Dictionary")
+        self.buttonGenerateWordFrequency.setGeometry(QtCore.QRect(610, 682, 130, 40))
+        self.buttonGenerateWordFrequency.setText("Generate Frequency List")
         font = QtGui.QFont()
-        font.setPointSize(6)
+        font.setPointSize(7)
         self.buttonGenerateWordFrequency.setFont(font)
         self.buttonGenerateWordFrequency.setObjectName("buttonGenerateWordFrequency")
         
         self.labelImage = QtWidgets.QLabel(self.centralwidget)
-        self.labelImage.setGeometry(QtCore.QRect(250, 50, 600, 480))
+        self.labelImage.setGeometry(QtCore.QRect(190, 30, 550, 630))
         self.labelImage.setFrameShape(QtWidgets.QFrame.WinPanel)
         self.labelImage.setText("")
         self.labelImage.setObjectName("labelImage")
         self.buttonExtractText = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonExtractText.setGeometry(QtCore.QRect(30, 130, 200, 40))
+        self.buttonExtractText.setGeometry(QtCore.QRect(25, 130, 130, 100))
         font = QtGui.QFont()
-        font.setPointSize(7)
+        font.setPointSize(9)
         self.buttonExtractText.setFont(font)
         self.buttonExtractText.setIconSize(QtCore.QSize(16, 16))
         self.buttonExtractText.setObjectName("buttonExtractText")
         self.buttonClear = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonClear.setGeometry(QtCore.QRect(930, 610, 130, 40))
+        self.buttonClear.setGeometry(QtCore.QRect(782, 682, 130, 40))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.buttonClear.setFont(font)
         self.buttonClear.setObjectName("buttonClear")
         self.buttonSave = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonSave.setGeometry(QtCore.QRect(1200, 610, 130, 40))
+        self.buttonSave.setGeometry(QtCore.QRect(1202, 682, 130, 40))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.buttonSave.setFont(font)
         self.buttonSave.setObjectName("buttonSave")
         self.textEdit = QtWidgets.QTextEdit(self.centralwidget)
-        self.textEdit.setGeometry(QtCore.QRect(930, 50, 400, 480))
+        self.textEdit.setGeometry(QtCore.QRect(782, 30, 550, 630))
         font = QtGui.QFont()
         font.setPointSize(10)
         self.textEdit.setFont(font)
@@ -95,15 +94,15 @@ class Ui_MainWindow(object):
         self.textEdit.setFrameShadow(QtWidgets.QFrame.Plain)
         self.textEdit.setObjectName("textEdit")
         self.buttonExtractText_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonExtractText_2.setGeometry(QtCore.QRect(30, 270, 200, 40))
+        self.buttonExtractText_2.setGeometry(QtCore.QRect(25, 270, 130, 100))
         font = QtGui.QFont()
-        font.setPointSize(7)
+        font.setPointSize(9)
         self.buttonExtractText_2.setFont(font)
         self.buttonExtractText_2.setObjectName("buttonExtractText_2")
         self.buttonExtractText_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.buttonExtractText_3.setGeometry(QtCore.QRect(30, 410, 200, 40))
+        self.buttonExtractText_3.setGeometry(QtCore.QRect(25, 410, 130, 100))
         font = QtGui.QFont()
-        font.setPointSize(7)
+        font.setPointSize(9)
         self.buttonExtractText_3.setFont(font)
         self.buttonExtractText_3.setObjectName("buttonExtractText_3")
         MainWindow.setCentralWidget(self.centralwidget)
@@ -131,11 +130,11 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Optical Character Recognition"))
         self.buttonGetImage.setText(_translate("MainWindow", "Load Image"))
-        self.buttonExtractText.setText(_translate("MainWindow", "Extract text (Tesseract + Dictionary Match)"))
+        self.buttonExtractText.setText(_translate("MainWindow", "Tesseract \n+ \nDictionary Match)"))
         self.buttonClear.setText(_translate("MainWindow", "Clear"))
         self.buttonSave.setText(_translate("MainWindow", "Save"))
-        self.buttonExtractText_2.setText(_translate("MainWindow", "Extract text ( Nearest Dictionalry Match)"))
-        self.buttonExtractText_3.setText(_translate("MainWindow", "Extract text ( EMERES Model)"))
+        self.buttonExtractText_2.setText(_translate("MainWindow", "Nearest Match"))
+        self.buttonExtractText_3.setText(_translate("MainWindow", "EMERES Model"))
 
     def getImage(self):
         options = QtWidgets.QFileDialog.Options()
@@ -148,8 +147,10 @@ class Ui_MainWindow(object):
             if re.search(pattern,self.fileName):
                 self.setImage(self.fileName)
 
-    def setImage(self,fileName):
-        self.labelImage.setPixmap(QPixmap(fileName))
+    def setImage(self, fileName):
+        pixmap =QPixmap(fileName)
+        pixmap2 = pixmap.scaledToWidth(600)
+        self.labelImage.setPixmap(pixmap2)    
         self.buttonExtractText.setEnabled(True)
 
     def extractText(self):
