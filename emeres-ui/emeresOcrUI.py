@@ -119,9 +119,10 @@ class Ui_MainWindow(object):
         self.buttonExtractText.clicked.connect(self.extractText)
         self.buttonExtractText_2.clicked.connect(self.extractText_2) 
         self.buttonExtractText.setEnabled(False)
-        #self.buttonExtractText_2.setEnabled(False)
+        self.buttonExtractText_2.setEnabled(False)
         self.buttonClear.clicked.connect(self.clearText) 
         self.buttonSave.clicked.connect(self.saveText) 
+        self.buttonExtractText_3.setEnabled(False)
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
@@ -130,7 +131,7 @@ class Ui_MainWindow(object):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "Optical Character Recognition"))
         self.buttonGetImage.setText(_translate("MainWindow", "Load Image"))
-        self.buttonExtractText.setText(_translate("MainWindow", "Tesseract \n+ \nDictionary Match)"))
+        self.buttonExtractText.setText(_translate("MainWindow", "Tesseract \n+ \nDictionary Match"))
         self.buttonClear.setText(_translate("MainWindow", "Clear"))
         self.buttonSave.setText(_translate("MainWindow", "Save"))
         self.buttonExtractText_2.setText(_translate("MainWindow", "Nearest Match"))
@@ -152,7 +153,8 @@ class Ui_MainWindow(object):
         pixmap2 = pixmap.scaledToWidth(600)
         self.labelImage.setPixmap(pixmap2)    
         self.buttonExtractText.setEnabled(True)
-
+        self.buttonExtractText_2.setEnabled(True)
+        #self.buttonExtractText_3.setEnabled(True)
     def extractText(self):
         self.textEdit.clear()        
         config = ('-l sin --oem 0 --psm 3')
