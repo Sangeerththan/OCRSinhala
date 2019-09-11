@@ -34,7 +34,7 @@ for angle in angles:
 
 best_score = max(scores)
 best_angle = angles[scores.index(best_score)]
-print('Best angle: {}'.formate(best_angle))
+print('Best angle: {}'.format(best_angle))
 
 # correct skew
 data = inter.rotate(bin_img, best_angle, reshape=False, order=0)
