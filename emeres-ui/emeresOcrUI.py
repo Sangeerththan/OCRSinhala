@@ -15,7 +15,7 @@ from PyQt5.QtGui import  QIcon, QPixmap, QColor
 class Ui_MainWindow(object):
 
     def __init__(self):
-        pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files (x86)\Tesseract-OCR\\tesseract.exe'
+        pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR\\tesseract.exe'
         
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
