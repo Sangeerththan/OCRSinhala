@@ -1,10 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-try:
-  # %tensorflow_version only exists in Colab.
-  %tensorflow_version 2.x
-except Exception:
-  pass
 
 import tensorflow as tf
 tf.__version__
@@ -138,8 +133,8 @@ def train_step(images):
     discriminator_optimizer.apply_gradients(zip(gradients_of_discriminator, discriminator.trainable_variables))
 
 def train(dataset, epochs):
-      for epoch in range(epochs):
-    start = time.time()
+    for epoch in range(epochs):
+      start = time.time()
 
     for image_batch in dataset:
       train_step(image_batch)
@@ -156,9 +151,9 @@ def train(dataset, epochs):
 
     print ('Time for epoch {} is {} sec'.format(epoch + 1, time.time()-start))
 
-  # Generate after the final epoch
-  display.clear_output(wait=True)
-  generate_and_save_images(generator,
+# Generate after the final epoch
+display.clear_output(wait=True)
+generate_and_save_images(generator,
                            epochs,
                            seed)
 
@@ -177,6 +172,6 @@ def generate_and_save_images(model, epoch, test_input):
   plt.savefig('image_at_epoch_{:04d}.png'.format(epoch))
   plt.show()
 
-  %%time
+
 train(train_dataset, EPOCHS)
 
