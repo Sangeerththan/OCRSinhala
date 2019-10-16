@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 public class TextToGraphics {
 
     public static void main(String[] args) {
-        String text = "Hello";
+        String text = "කොමඩ්  ";
 
         /*
            Because font metrics is based on a graphics context, we need to create
@@ -20,7 +20,7 @@ public class TextToGraphics {
          */
         BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2d = img.createGraphics();
-        Font font = new Font("Arial", Font.PLAIN, 48);
+        Font font = new Font("Iskoola Pota", Font.PLAIN, 48);
         g2d.setFont(font);
         FontMetrics fm = g2d.getFontMetrics();
         int width = fm.stringWidth(text);
