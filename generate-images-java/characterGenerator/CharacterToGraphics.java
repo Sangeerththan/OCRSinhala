@@ -21,11 +21,11 @@ import java.io.InputStreamReader;
 
 
 
-public class TextToGraphics {
+public class CharacterToGraphics {
 
     public static void main(String[] args) throws IOException  {
 		
-		String fileName = "testdic.txt";
+		String fileName = "characters.txt";
 		List<String> dicList=new ArrayList<String>();  
 		
 		dicList = readUsingBufferedReader(fileName, StandardCharsets.UTF_8);
