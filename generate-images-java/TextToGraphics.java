@@ -38,6 +38,7 @@ public class TextToGraphics {
          */
 		for(String s:dicList){ 
 			String text = s;
+			directory = "Output"/text.mkdir();
   
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g2d = img.createGraphics();
@@ -73,7 +74,7 @@ public class TextToGraphics {
 			g2d.drawString(text, 0, fm.getAscent());
 			g2d.dispose();
 			try {
-				ImageIO.write(img, "png", new File("Output/"+text+".png"));
+				ImageIO.write(img, "png", new File(file.mkdir+a+".png"));
 				//ImageIO.write(img, "png", new File(text+".png"));
 			} catch (IOException ex) {
 				ex.printStackTrace();
