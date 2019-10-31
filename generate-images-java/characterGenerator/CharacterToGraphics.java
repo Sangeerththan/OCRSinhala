@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 
 
 
@@ -55,6 +56,14 @@ public class CharacterToGraphics {
 		System.out.println(characterVariation);
 		*/
 		dicList = readUsingBufferedReader(fileName, StandardCharsets.UTF_8);
+		int characterLength = CharacterToGraphics.characterLengthReader(fileName);
+		System.out.println("The Number of Characters :"+ characterLength);
+		int k = 0;
+		for (int i=0; i < characterLength; i++){
+			k++;
+			File dir = new File(Integer.toString(k));
+			dir.mkdir();
+		}
 				
 
         /*
@@ -62,10 +71,12 @@ public class CharacterToGraphics {
            a small, temporary image so we can ascertain the width and height
            of the final image
          */
-		
+		int directory = 0;
 		for(String s:dicList){  
-			int a =0;
+			int a = -1;
 			String text = s;
+			directory ++;
+			
 			
   
 			BufferedImage img = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
@@ -112,7 +123,8 @@ public class CharacterToGraphics {
 					g2d.drawString(text, 0, fm.getAscent());
 					g2d.dispose();
 					try {
-						ImageIO.write(img, "png", new File("Output/" + a+".png"));
+						
+						ImageIO.write(img, "png", new File(Integer.toString(directory)+"/" +a+".png"));
 						//ImageIO.write(img, "png", new File(text+".png"));
 					} catch (IOException ex) {
 						ex.printStackTrace();
@@ -121,6 +133,7 @@ public class CharacterToGraphics {
 				}
 			}
 		}
+		
 		}
 		private static List readUsingBufferedReader(String fileName, Charset cs) throws IOException {
 			File file = new File(fileName);
@@ -137,5 +150,15 @@ public class CharacterToGraphics {
 			}
 			br.close();
 			return wordsList;
+		}
+		private static int characterLengthReader(String filename) throws IOException {
+			LineNumberReader reader  = new LineNumberReader(new FileReader(filename));
+			int cnt = 0;
+			String lineRead = "";
+			while ((lineRead = reader.readLine()) != null) {}
+			
+			cnt = reader.getLineNumber(); 
+			reader.close();
+			return cnt;
 		}
 }
