@@ -37,7 +37,7 @@ public class CharacterToGraphics {
 		// The fonts used
 		fonts.add("Nirmala UI");
 		fonts.add("Iskoola Pota");
-		fonts.add("aKandyNew Regular");
+		fonts.add("aKandyNew");
 		fonts.add("FMGanganee x Regular");
 
 		//Font sizes
@@ -61,7 +61,7 @@ public class CharacterToGraphics {
 		int k = 0;
 		for (int i=0; i < characterLength; i++){
 			k++;
-			File dir = new File(Integer.toString(k));
+			File dir = new File("Output/"+Integer.toString(k));
 			dir.mkdir();
 		}
 				
@@ -124,13 +124,14 @@ public class CharacterToGraphics {
 					g2d.dispose();
 					try {
 						
-						ImageIO.write(img, "png", new File(Integer.toString(directory)+"/" +a+".png"));
+						ImageIO.write(img, "png", new File("Output/"+Integer.toString(directory)+"/" +a+".png"));
 						//ImageIO.write(img, "png", new File(text+".png"));
 					} catch (IOException ex) {
 						ex.printStackTrace();
 					}
 		
 				}
+				a--;
 			}
 		}
 		
