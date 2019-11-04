@@ -37,12 +37,15 @@ public class CharacterToGraphics {
 		// The fonts used
 		fonts.add("Nirmala UI");
 		fonts.add("Iskoola Pota");
-		fonts.add("aKandyNew");
-		fonts.add("FMGanganee x Regular");
-
+		fonts.add("NIDAHASA Chapa Regular");
+		fonts.add("NIDAHASA Hiru Regular");
+		fonts.add("NIDAHASA Madu Regular");
+		fonts.add("NIDAHASA Sandareka Regular");
+		fonts.add("NIDAHASA Sarasavi Regular");
 		//Font sizes
 		fontSize.add(24);
-		fontSize.add(36);
+		fontSize.add(32);
+		fontSize.add(40);
 		fontSize.add(48);
 
 		//Font properties

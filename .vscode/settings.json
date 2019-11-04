@@ -1,3 +1,4 @@
 {
-    "git.ignoreLimitWarning": true
+    "git.ignoreLimitWarning": true,
+    "python.pythonPath": "C:\\Users\\senthuran\\AppData\\Local\\Programs\\Python\\Python36\\python.exe"
 }
