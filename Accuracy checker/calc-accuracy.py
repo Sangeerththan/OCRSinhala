@@ -2,7 +2,8 @@ import codecs
 
 #f = codecs.open("testing-out.txt", encoding="utf-8")
 #f = codecs.open("tes-dic-out.txt", encoding="utf-8")
-f = codecs.open("tes-out.txt", encoding="utf-8")
+f = codecs.open("tes-con-out.txt", encoding="utf-8")
+#f = codecs.open("tes-out.txt", encoding="utf-8")
 lines = f.read().splitlines()
 
 totalcharacters=0

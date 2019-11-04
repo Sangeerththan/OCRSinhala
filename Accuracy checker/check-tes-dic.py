@@ -6,8 +6,8 @@ import difflib
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR\\tesseract.exe'
 
-#mylist = [f for f in glob.glob("../generate-images-java/Output/*")]
-mylist = [f for f in glob.glob("../generate-images-java/testout/*")]
+mylist = [f for f in glob.glob("../generate-images-java/Output/*")]
+#mylist = [f for f in glob.glob("../generate-images-java/testout/*")]
 #mylist = [f for f in glob.glob("images/*")]
 
 g = codecs.open("tes-dic-out.txt", "w+", encoding="utf-8")

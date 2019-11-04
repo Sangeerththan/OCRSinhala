@@ -1,11 +1,15 @@
-for 1000 ocr words:
+for 10000 ocr words:
 --------------------
-
 only tesseract:
 total cahracter count: 74033
 correctly ocred character counter: 52731
 accuracy: 71.23%
 
 
-tesseract+dic:
 
+for 1000 ocr words:
+--------------------
+tesseract+dic:
+total cahracter count: 7170
+correctly ocred character counter: 5822
+accuracy: 81.2%
