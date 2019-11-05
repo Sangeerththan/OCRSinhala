@@ -27,7 +27,7 @@ def StringFormatted(con_string):
     str_l = str(con_list).split("\\r\\n")
     str_latest =str(str_l).strip(", ")
     print(str_latest)
-    #print(str_l)
+    print(str_l)
     print("Length of charcter:",len(str_l))
     return str_latest
 
@@ -37,5 +37,6 @@ def refactorStr(stringInput):
         string1 = strings[0]
         string2 = strings[1]
         print("string is:\n",str(strings[len(strings)-2]),str(strings[len(strings)-1]))
-print(refactorStr(str_l))
+#print(refactorStr(str_l))
+print(StringFormatted(con_string))
 
