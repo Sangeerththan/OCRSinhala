@@ -62,10 +62,10 @@ for i in range(0, len(mylist)):
 			
 				
 		
-		if(foundfromconf==False):
-			diffout = difflib.get_close_matches(ocrWord,dic_words)
-			if(len(diffout)!=0):
-				text=diffout[0]
+		#if(foundfromconf==False):
+			#diffout = difflib.get_close_matches(ocrWord,dic_words)
+			#if(len(diffout)!=0):
+				#text=diffout[0]
 			
 	
 	g.write(text+"-")
