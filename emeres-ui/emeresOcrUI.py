@@ -279,12 +279,13 @@ class Ui_MainWindow(object):
                                 break
                         if(checkdicNew):
                             new_checked_word = [newOcrWord, "1"]
+                            fulllist[i] =new_checked_word
                         else:
                             new_checked_word = [newOcrWord, "0"]
                         print(newOcrWord)
                         
                 #fulllist.remove(fulllist[i])
-                fulllist[i] =new_checked_word                       
+                #fulllist[i] =new_checked_word                       
     
                 print("Found List ",found)
                 
