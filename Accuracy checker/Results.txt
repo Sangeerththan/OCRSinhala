@@ -13,3 +13,20 @@ tesseract+dic:
 total cahracter count: 7170
 correctly ocred character counter: 5822
 accuracy: 81.2%
+
+
+
+***** New resutls using editdistance method ->
+
+Tesseract only:
+
+Charactr level accuracy: 78.41%
+Word level accuracy: 39.12%
+
+tesseract+dictionary:
+
+Charactr level accuracy: 82.44%
+Word level accuracy: 69.55%
+
+ 
+
