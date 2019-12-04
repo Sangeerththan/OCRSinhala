@@ -28,5 +28,16 @@ tesseract+dictionary:
 Charactr level accuracy: 82.44%
 Word level accuracy: 69.55%
 
- 
+
+
+......
+
+
+Charactr level accuracy: 83.72%
+Word level accuracy: 71.08%
+
+
+
+
+......
 
