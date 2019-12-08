@@ -2,9 +2,12 @@ import codecs
 import editdistance
 
 #f = codecs.open("testing-out.txt", encoding="utf-8")
-f = codecs.open("tes-dic-out.txt", encoding="utf-8")
+#f = codecs.open("tes-dic-out.txt", encoding="utf-8")
 #f = codecs.open("tes-con-out.txt", encoding="utf-8")
 #f = codecs.open("tes-out.txt", encoding="utf-8")
+#f = codecs.open("google-result.txt", encoding="utf-8")
+#f = codecs.open("tes-con-out-100.txt", encoding="utf-8")
+f = codecs.open("tes-con-dic-out-100.txt", encoding="utf-8")
 lines = f.read().splitlines()
 
 #totalcharacters=0

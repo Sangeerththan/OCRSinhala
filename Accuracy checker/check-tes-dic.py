@@ -6,11 +6,13 @@ import difflib
 
 pytesseract.pytesseract.tesseract_cmd = 'C:\Program Files\Tesseract-OCR\\tesseract.exe'
 
-mylist = [f for f in glob.glob("../generate-images-java/Output/*")]
+#mylist = [f for f in glob.glob("../generate-images-java/Output/*")]
 #mylist = [f for f in glob.glob("../generate-images-java/testout/*")]
 #mylist = [f for f in glob.glob("images/*")]
 
-g = codecs.open("tes-dic-out.txt", "w+", encoding="utf-8")
+mylist = [f for f in glob.glob("../generate-images-java/testing-100-images/*")]
+
+g = codecs.open("tes-dic-out-100.txt", "w+", encoding="utf-8")
 
 config = ('-l sin --oem 1 --psm 3')
 
