@@ -36,8 +36,29 @@ Word level accuracy: 69.55%
 Charactr level accuracy: 83.72%
 Word level accuracy: 71.08%
 
-
-
-
 ......
+
+
+
+*****  100 image test accuracies 
+
+google 
+
+Charactr level accuracy: 79.85%
+Word level accuracy: 64.0%
+
+tesseract 
+
+Charactr level accuracy: 91.78%
+Word level accuracy: 55.0%
+
+tesseract + dictionary
+Charactr level accuracy: 96.37%
+Word level accuracy: 90.0%
+
+tesseract + dictionary + conclution
+Charactr level accuracy: 96.37%
+Word level accuracy: 90.0%
+
+
 
